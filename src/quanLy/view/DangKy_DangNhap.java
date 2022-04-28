@@ -1,8 +1,15 @@
 package quanLy.view;
 
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.MatteBorder;
+import quanLy.Dao.Dao;
+import quanLy.model.TaoTaiKhoan;
+import quanLy.service.Service;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,10 +19,14 @@ import javax.swing.border.MatteBorder;
 
 public class DangKy_DangNhap extends javax.swing.JFrame {
 
-  
+  Dao daos = new Dao();
+  TaoTaiKhoan taotk = new TaoTaiKhoan(); 
+  Service service;
     public DangKy_DangNhap() {
         initComponents();
         this.setLocationRelativeTo(null);
+        jpnDangNhap.setVisible(true);
+        jpnDangKy.setVisible(false);
         jlbDangNhap.setBorder(new MatteBorder(0, 0, 3, 0, Color.white));
     }
 
@@ -29,16 +40,7 @@ public class DangKy_DangNhap extends javax.swing.JFrame {
     private void initComponents() {
 
         jpnDangKy_DangNhap = new javax.swing.JPanel();
-        jpnTitle = new javax.swing.JPanel();
-        jlbDangNhap = new javax.swing.JLabel();
-        jlbDangKy = new javax.swing.JLabel();
         jpnMain = new javax.swing.JPanel();
-        jpnDangNhap = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        btnDangNhap = new javax.swing.JLabel();
-        jtfTenTaiKhoan_dn = new javax.swing.JTextField();
-        jpfMatKhau_dn = new javax.swing.JPasswordField();
         jpnDangKy = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -49,111 +51,25 @@ public class DangKy_DangNhap extends javax.swing.JFrame {
         jtfEmail_dk = new javax.swing.JTextField();
         jpfMatKhau_dk = new javax.swing.JPasswordField();
         btnDangKy = new javax.swing.JLabel();
+        jpnDangNhap = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnDangNhap = new javax.swing.JLabel();
+        jtfTenTaiKhoan_dn = new javax.swing.JTextField();
+        jpfMatKhau_dn = new javax.swing.JPasswordField();
+        matkhau = new javax.swing.JCheckBox();
+        jpnTitle = new javax.swing.JPanel();
+        jlbDangNhap = new javax.swing.JLabel();
+        jlbDangKy = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        jpnTitle.setLayout(new java.awt.GridLayout(1, 2));
-
-        jlbDangNhap.setBackground(new java.awt.Color(176, 224, 230));
-        jlbDangNhap.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jlbDangNhap.setForeground(new java.awt.Color(0, 102, 102));
-        jlbDangNhap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlbDangNhap.setText("ĐĂNG NHẬP");
-        jlbDangNhap.setOpaque(true);
-        jlbDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlbDangNhapMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jlbDangNhapMousePressed(evt);
-            }
-        });
-        jpnTitle.add(jlbDangNhap);
-
-        jlbDangKy.setBackground(new java.awt.Color(135, 206, 235));
-        jlbDangKy.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jlbDangKy.setForeground(new java.awt.Color(0, 51, 153));
-        jlbDangKy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlbDangKy.setText("ĐĂNG KÝ");
-        jlbDangKy.setOpaque(true);
-        jlbDangKy.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlbDangKyMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jlbDangKyMousePressed(evt);
-            }
-        });
-        jpnTitle.add(jlbDangKy);
+        jpnDangKy_DangNhap.setBackground(new java.awt.Color(30, 115, 198));
 
         jpnMain.setBackground(new java.awt.Color(255, 255, 51));
         jpnMain.setLayout(new java.awt.CardLayout());
-
-        jpnDangNhap.setBackground(new java.awt.Color(176, 224, 230));
-
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel1.setText("Tên Tài Khoản");
-
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel2.setText("Mật Khẩu");
-
-        btnDangNhap.setBackground(new java.awt.Color(0, 153, 153));
-        btnDangNhap.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnDangNhap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnDangNhap.setText("ĐĂNG NHẬP ");
-        btnDangNhap.setOpaque(true);
-        btnDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDangNhapMouseClicked(evt);
-            }
-        });
-
-        jtfTenTaiKhoan_dn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jpfMatKhau_dn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout jpnDangNhapLayout = new javax.swing.GroupLayout(jpnDangNhap);
-        jpnDangNhap.setLayout(jpnDangNhapLayout);
-        jpnDangNhapLayout.setHorizontalGroup(
-            jpnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnDangNhapLayout.createSequentialGroup()
-                .addGroup(jpnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpnDangNhapLayout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addGroup(jpnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jpnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfTenTaiKhoan_dn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jpfMatKhau_dn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jpnDangNhapLayout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(132, Short.MAX_VALUE))
-        );
-        jpnDangNhapLayout.setVerticalGroup(
-            jpnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnDangNhapLayout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addGroup(jpnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfTenTaiKhoan_dn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jpnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpnDangNhapLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jpfMatKhau_dn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpnDangNhapLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
-        );
-
-        jpnMain.add(jpnDangNhap, "card2");
 
         jpnDangKy.setBackground(new java.awt.Color(135, 206, 235));
 
@@ -174,7 +90,8 @@ public class DangKy_DangNhap extends javax.swing.JFrame {
         jLabel7.setText("Email");
 
         jtfHoTen_dk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jtfHoTen_dk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jtfHoTen_dk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtfHoTen_dk.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jtfHoTen_dk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfHoTen_dkActionPerformed(evt);
@@ -182,13 +99,16 @@ public class DangKy_DangNhap extends javax.swing.JFrame {
         });
 
         jtfTenTaiKhoan_dk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jtfTenTaiKhoan_dk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jtfTenTaiKhoan_dk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtfTenTaiKhoan_dk.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jtfEmail_dk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jtfEmail_dk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jtfEmail_dk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtfEmail_dk.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jpfMatKhau_dk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jpfMatKhau_dk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jpfMatKhau_dk.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jpfMatKhau_dk.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         btnDangKy.setBackground(new java.awt.Color(55, 95, 160));
         btnDangKy.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -235,7 +155,7 @@ public class DangKy_DangNhap extends javax.swing.JFrame {
         jpnDangKyLayout.setVerticalGroup(
             jpnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnDangKyLayout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(jpnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfHoTen_dk, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -258,19 +178,149 @@ public class DangKy_DangNhap extends javax.swing.JFrame {
 
         jpnMain.add(jpnDangKy, "card3");
 
+        jpnDangNhap.setBackground(new java.awt.Color(176, 224, 230));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel1.setText("Tên Tài Khoản");
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel2.setText("Mật Khẩu");
+
+        btnDangNhap.setBackground(new java.awt.Color(0, 153, 153));
+        btnDangNhap.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnDangNhap.setForeground(new java.awt.Color(255, 255, 255));
+        btnDangNhap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnDangNhap.setText("ĐĂNG NHẬP ");
+        btnDangNhap.setOpaque(true);
+        btnDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDangNhapMouseClicked(evt);
+            }
+        });
+
+        jtfTenTaiKhoan_dn.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtfTenTaiKhoan_dn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jtfTenTaiKhoan_dn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfTenTaiKhoan_dnActionPerformed(evt);
+            }
+        });
+
+        jpfMatKhau_dn.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jpfMatKhau_dn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
+        matkhau.setText("Hiển thị mật khẩu");
+        matkhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                matkhauActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpnDangNhapLayout = new javax.swing.GroupLayout(jpnDangNhap);
+        jpnDangNhap.setLayout(jpnDangNhapLayout);
+        jpnDangNhapLayout.setHorizontalGroup(
+            jpnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnDangNhapLayout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addGroup(jpnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(matkhau)
+                    .addGroup(jpnDangNhapLayout.createSequentialGroup()
+                        .addGroup(jpnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfTenTaiKhoan_dn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jpfMatKhau_dn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(161, Short.MAX_VALUE))
+        );
+        jpnDangNhapLayout.setVerticalGroup(
+            jpnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnDangNhapLayout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addGroup(jpnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfTenTaiKhoan_dn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jpnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpnDangNhapLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jpfMatKhau_dn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpnDangNhapLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(matkhau, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
+        );
+
+        jpnMain.add(jpnDangNhap, "card2");
+
+        jpnTitle.setLayout(new java.awt.GridLayout(1, 2));
+
+        jlbDangNhap.setBackground(new java.awt.Color(176, 224, 230));
+        jlbDangNhap.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jlbDangNhap.setForeground(new java.awt.Color(0, 102, 102));
+        jlbDangNhap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlbDangNhap.setText("ĐĂNG NHẬP");
+        jlbDangNhap.setOpaque(true);
+        jlbDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlbDangNhapMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlbDangNhapMousePressed(evt);
+            }
+        });
+        jpnTitle.add(jlbDangNhap);
+
+        jlbDangKy.setBackground(new java.awt.Color(135, 206, 235));
+        jlbDangKy.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jlbDangKy.setForeground(new java.awt.Color(0, 51, 153));
+        jlbDangKy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlbDangKy.setText("ĐĂNG KÝ");
+        jlbDangKy.setOpaque(true);
+        jlbDangKy.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlbDangKyMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jlbDangKyMousePressed(evt);
+            }
+        });
+        jpnTitle.add(jlbDangKy);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanLy/image/button.png"))); // NOI18N
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnDangKy_DangNhapLayout = new javax.swing.GroupLayout(jpnDangKy_DangNhap);
         jpnDangKy_DangNhap.setLayout(jpnDangKy_DangNhapLayout);
         jpnDangKy_DangNhapLayout.setHorizontalGroup(
             jpnDangKy_DangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jpnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpnTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnDangKy_DangNhapLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addContainerGap())
         );
         jpnDangKy_DangNhapLayout.setVerticalGroup(
             jpnDangKy_DangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnDangKy_DangNhapLayout.createSequentialGroup()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jpnTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jpnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jpnMain, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -328,6 +378,23 @@ public class DangKy_DangNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,sb.toString(), "Lỗi đăng nhập",JOptionPane.ERROR_MESSAGE);
                 return ;
         }
+        else {
+           service= new Service();
+            try {
+                int a = service.kiemTraTaiKhoan(tenTaiKhoan, matKhau);
+                if(a==1){
+                    JOptionPane.showMessageDialog(this,"Thành công");
+                    TrangChuQuanLy tc = new TrangChuQuanLy();
+                    tc.setVisible(true);
+                    this.dispose();
+                }
+                else
+                    JOptionPane.showMessageDialog(this,"Đăng nhập không thành công", "Lỗi đăng nhập",JOptionPane.ERROR_MESSAGE);
+                    
+            } catch (SQLException ex) {
+                Logger.getLogger(DangKy_DangNhap.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_btnDangNhapMouseClicked
 
     private void btnDangKyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangKyMouseClicked
@@ -353,7 +420,34 @@ public class DangKy_DangNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,sb.toString(), "Lỗi đăng ký",JOptionPane.ERROR_MESSAGE);
                 return ;
         }
+        else{
+            service = new Service();
+            taotk = new TaoTaiKhoan();
+            taotk.setHoTen(hoTen);
+            taotk.setTenTaiKhoan(tenTaiKhoan);
+            taotk.setEmail(email);
+            taotk.setMatKhau(matKhau);
+            service.themTaiKhoan(taotk);
+            JOptionPane.showMessageDialog(this,"Tạo Tài Khoản Thành Công");
+            jpnDangKy.setVisible(false);
+            jpnDangNhap.setVisible(true);
+        }
     }//GEN-LAST:event_btnDangKyMouseClicked
+
+    private void jtfTenTaiKhoan_dnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTenTaiKhoan_dnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfTenTaiKhoan_dnActionPerformed
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void matkhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matkhauActionPerformed
+        if(matkhau.isSelected())
+            jpfMatKhau_dn.setEchoChar((char) 0);
+        else 
+            jpfMatKhau_dn.setEchoChar('*');
+    }//GEN-LAST:event_matkhauActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,6 +489,7 @@ public class DangKy_DangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel btnDangNhap;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -412,5 +507,6 @@ public class DangKy_DangNhap extends javax.swing.JFrame {
     private javax.swing.JTextField jtfHoTen_dk;
     private javax.swing.JTextField jtfTenTaiKhoan_dk;
     private javax.swing.JTextField jtfTenTaiKhoan_dn;
+    private javax.swing.JCheckBox matkhau;
     // End of variables declaration//GEN-END:variables
 }
